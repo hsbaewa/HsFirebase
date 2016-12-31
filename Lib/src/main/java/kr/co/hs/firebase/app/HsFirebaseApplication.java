@@ -5,7 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -98,8 +98,23 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
 
     @Override
     public void signOut() {
+        signOut(null);
+    }
+
+    @Override
+    public void signOut(HsFirebaseAuth.OnFirebaseSignOutResultListener listener) {
         if(getFirebaseAuth() != null)
-            getFirebaseAuth().signOut();
+            getFirebaseAuth().signOut(listener);
+    }
+
+    @Override
+    public void signInWithCredential(AuthCredential credential, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
+        if(getFirebaseAuth() != null)
+            getFirebaseAuth().signInWithCredential(credential, listener);
+        else{
+            if(listener != null)
+                listener.onFailure(new NullPointerException("FirebaseAuth is Null"));
+        }
     }
 
     void setFirebaseToken(String token){

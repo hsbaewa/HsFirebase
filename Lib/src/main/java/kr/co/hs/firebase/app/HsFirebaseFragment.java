@@ -4,6 +4,7 @@ package kr.co.hs.firebase.app;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 
 import kr.co.hs.app.HsFragment;
@@ -72,9 +73,14 @@ public abstract class HsFirebaseFragment extends HsFragment implements IHsFireba
 
     @Override
     public void signOut() {
+        signOut(null);
+    }
+
+    @Override
+    public void signOut(HsFirebaseAuth.OnFirebaseSignOutResultListener listener) {
         HsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
-            application.signOut();
+            application.signOut(listener);
     }
 
     @Override
@@ -92,5 +98,12 @@ public abstract class HsFirebaseFragment extends HsFragment implements IHsFireba
             return auth.getCurrentUser();
         else
             return null;
+    }
+
+    @Override
+    public void signInWithCredential(AuthCredential credential, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            application.signInWithCredential(credential, listener);
     }
 }

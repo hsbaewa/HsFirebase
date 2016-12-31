@@ -4,7 +4,7 @@ package kr.co.hs.firebase;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 
 import kr.co.hs.app.IHs;
@@ -54,4 +54,7 @@ public interface IHsFirebase extends IHs {
     void createUserWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener);
     void signInWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener);
     void signOut();
+    void signOut(HsFirebaseAuth.OnFirebaseSignOutResultListener listener);
+
+    void signInWithCredential(AuthCredential credential, HsFirebaseAuth.OnFirebaseAuthResultListener listener);
 }

@@ -4,6 +4,7 @@ package kr.co.hs.firebase.app;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 
 import kr.co.hs.app.HsActivity;
@@ -82,9 +83,21 @@ public class HsFirebaseActivity extends HsActivity implements IHsFirebaseActivit
 
     @Override
     public void signOut() {
+        signOut(null);
+    }
+
+    @Override
+    public void signOut(HsFirebaseAuth.OnFirebaseSignOutResultListener listener) {
         HsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
-            application.signOut();
+            application.signOut(listener);
+    }
+
+    @Override
+    public void signInWithCredential(AuthCredential credential, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            application.signInWithCredential(credential, listener);
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -12,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
  * Created by Bae on 2016-12-31.
  */
 
-public class HsFirebaseAuth extends FirebaseAuth{
+public class HsFirebaseAuth extends FirebaseAuth {
 
     private static HsFirebaseAuth instance = null;
     public static HsFirebaseAuth getInstance(){
@@ -55,8 +56,51 @@ public class HsFirebaseAuth extends FirebaseAuth{
         });
     }
 
+    public void signInWithCredential(@NonNull AuthCredential authCredential, final OnFirebaseAuthResultListener listener) {
+        super.signInWithCredential(authCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    if(listener != null)
+                        listener.onSuccessful(task.getResult());
+                }else{
+                    if(listener != null)
+                        listener.onFailure(task.getException());
+                }
+            }
+        });
+    }
+
+    public void signOut(OnFirebaseSignOutResultListener listener) {
+        if(listener != null)
+            addAuthStateListener(new HsAuthStateListener(this, listener));
+        super.signOut();
+    }
+
+    class HsAuthStateListener implements AuthStateListener{
+        HsFirebaseAuth auth;
+        OnFirebaseSignOutResultListener listener;
+
+        public HsAuthStateListener(HsFirebaseAuth auth, OnFirebaseSignOutResultListener listener) {
+            this.auth = auth;
+            this.listener = listener;
+        }
+
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            if(firebaseAuth.getCurrentUser() == null){
+                this.auth.removeAuthStateListener(this);
+                this.listener.onSignOut();
+            }
+        }
+    }
+
     public interface OnFirebaseAuthResultListener{
         void onSuccessful(AuthResult authResult);
         void onFailure(Exception exception);
+    }
+
+    public interface OnFirebaseSignOutResultListener{
+        void onSignOut();
     }
 }
