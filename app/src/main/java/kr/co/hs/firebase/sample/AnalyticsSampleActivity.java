@@ -11,7 +11,7 @@ import kr.co.hs.firebase.app.HsFirebaseActivity;
  * Created by Bae on 2016-12-31.
  */
 
-public class AnalyticsSampleActivity extends HsFirebaseActivity {
+public class AnalyticsSampleActivity extends BaseActivity {
 
     TextView tv;
     @Override
