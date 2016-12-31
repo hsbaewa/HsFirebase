@@ -3,7 +3,6 @@ package kr.co.hs.firebase.app;
 
 import kr.co.hs.app.HsActivity;
 import kr.co.hs.firebase.IHsFirebaseActivity;
-import kr.co.hs.firebase.IHsFirebaseApplication;
 
 /**
  * Created by Bae on 2016-12-25.
