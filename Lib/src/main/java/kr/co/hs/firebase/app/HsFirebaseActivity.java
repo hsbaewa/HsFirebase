@@ -4,8 +4,11 @@ package kr.co.hs.firebase.app;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import kr.co.hs.app.HsActivity;
 import kr.co.hs.firebase.IHsFirebaseActivity;
+import kr.co.hs.firebase.auth.HsFirebaseAuth;
 
 /**
  * Created by Bae on 2016-12-25.
@@ -44,6 +47,44 @@ public class HsFirebaseActivity extends HsActivity implements IHsFirebaseActivit
         if(application != null)
             return application.setFirebaseAnalyticsCurrentScreen(activity, screenName, screenClassOverride);
         return false;
+    }
+
+    @Override
+    public HsFirebaseAuth getFirebaseAuth() {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getFirebaseAuth();
+        return null;
+    }
+
+    @Override
+    public FirebaseUser getFirebaseUser() {
+        HsFirebaseAuth auth = getFirebaseAuth();
+        if(auth != null)
+            return auth.getCurrentUser();
+        else
+            return null;
+    }
+
+    @Override
+    public void createUserWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            application.createUserWithEmailAndPassword(email, password, listener);
+    }
+
+    @Override
+    public void signInWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            application.signInWithEmailAndPassword(email, password, listener);
+    }
+
+    @Override
+    public void signOut() {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            application.signOut();
     }
 
     @Override

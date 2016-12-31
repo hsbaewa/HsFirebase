@@ -5,12 +5,15 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.text.SimpleDateFormat;
 
 import kr.co.hs.app.HsApplication;
 import kr.co.hs.firebase.IHsFirebaseApplication;
+import kr.co.hs.firebase.auth.HsFirebaseAuth;
 
 /**
  * Created by Bae on 2016-12-25.
@@ -20,6 +23,7 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
 
     private String mFirebaseToken = null;
     private FirebaseAnalytics mFirebaseAnalytics = null;
+    private HsFirebaseAuth mFirebaseAuth = null;
 
     @Override
     public void init() {
@@ -27,6 +31,7 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
         mFirebaseToken = FirebaseInstanceId.getInstance().getToken();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
         setFirebaseAnalyticsUserProperty();
+        mFirebaseAuth = HsFirebaseAuth.getInstance();
     }
 
     @Override
@@ -59,6 +64,42 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
             return true;
         }
         return false;
+    }
+
+    @Override
+    public HsFirebaseAuth getFirebaseAuth() {
+        return this.mFirebaseAuth;
+    }
+
+    @Override
+    public FirebaseUser getFirebaseUser() {
+        return getFirebaseAuth().getCurrentUser();
+    }
+
+    @Override
+    public void createUserWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
+        if(getFirebaseAuth() != null)
+            getFirebaseAuth().createUserWithEmailAndPassword(email, password, listener);
+        else{
+            if(listener != null)
+                listener.onFailure(new NullPointerException("FirebaseAuth is Null"));
+        }
+    }
+
+    @Override
+    public void signInWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
+        if(getFirebaseAuth() != null)
+            getFirebaseAuth().signInWithEmailAndPassword(email, password, listener);
+        else{
+            if(listener != null)
+                listener.onFailure(new NullPointerException("FirebaseAuth is Null"));
+        }
+    }
+
+    @Override
+    public void signOut() {
+        if(getFirebaseAuth() != null)
+            getFirebaseAuth().signOut();
     }
 
     void setFirebaseToken(String token){
@@ -118,6 +159,5 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
             &*/
         }
     }
-
 }
 

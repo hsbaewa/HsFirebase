@@ -4,7 +4,11 @@ package kr.co.hs.firebase;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import kr.co.hs.app.IHs;
+import kr.co.hs.firebase.auth.HsFirebaseAuth;
 
 /**
  * Created by Bae on 2016-12-25.
@@ -43,4 +47,11 @@ public interface IHsFirebase extends IHs {
     boolean sendFirebaseAnalyticsLogEvent(String name, Bundle data);
     boolean setFirebaseAnalyticsUserId(String id);
     boolean setFirebaseAnalyticsCurrentScreen(Activity activity, String screenName, String screenClassOverride);
+
+    //인증 관련
+    HsFirebaseAuth getFirebaseAuth();
+    FirebaseUser getFirebaseUser();
+    void createUserWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener);
+    void signInWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener);
+    void signOut();
 }
