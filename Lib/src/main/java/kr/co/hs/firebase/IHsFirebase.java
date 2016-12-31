@@ -6,9 +6,13 @@ import android.os.Bundle;
 
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.Map;
 
 import kr.co.hs.app.IHs;
 import kr.co.hs.firebase.auth.HsFirebaseAuth;
+import kr.co.hs.firebase.cloudmessaging.HsFirebaseMessagingInfo;
 
 /**
  * Created by Bae on 2016-12-25.
@@ -57,4 +61,12 @@ public interface IHsFirebase extends IHs {
     void signOut(HsFirebaseAuth.OnFirebaseSignOutResultListener listener);
 
     void signInWithCredential(AuthCredential credential, HsFirebaseAuth.OnFirebaseAuthResultListener listener);
+
+    //FCM 관련
+    boolean subscribe(String topic);
+    boolean unsubscribe(String topic);
+    boolean send(RemoteMessage remoteMessage);
+    HsFirebaseMessagingInfo getFirebaseMessagingInfo(String serverKey);
+    boolean send(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener);
+    boolean send(String serverKey, String[] to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener);
 }

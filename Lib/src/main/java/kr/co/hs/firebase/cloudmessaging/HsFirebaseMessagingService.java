@@ -1,26 +1,25 @@
-package kr.co.hs.firebase.app;
-
+package kr.co.hs.firebase.cloudmessaging;
 
 import android.app.Activity;
 import android.os.Bundle;
 
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Map;
 
-import kr.co.hs.app.HsActivity;
-import kr.co.hs.firebase.IHsFirebaseActivity;
+import kr.co.hs.content.HsPreferences;
+import kr.co.hs.firebase.IHsFirebase;
+import kr.co.hs.firebase.app.HsFirebaseApplication;
 import kr.co.hs.firebase.auth.HsFirebaseAuth;
-import kr.co.hs.firebase.cloudmessaging.HsFirebaseMessagingInfo;
 
 /**
- * Created by Bae on 2016-12-25.
+ * Created by Bae on 2016-12-31.
  */
 
-public class HsFirebaseActivity extends HsActivity implements IHsFirebaseActivity {
-
+public class HsFirebaseMessagingService extends FirebaseMessagingService implements IHsFirebase{
     @Override
     public String getFirebaseToken() {
         HsFirebaseApplication application = getHsFirebaseApplication();
@@ -140,6 +139,28 @@ public class HsFirebaseActivity extends HsActivity implements IHsFirebaseActivit
         return null;
     }
 
+    public HsFirebaseApplication getHsFirebaseApplication() {
+        HsFirebaseApplication application = (HsFirebaseApplication) getApplicationContext();
+        return application;
+    }
+
+    @Override
+    public HsPreferences getDefaultPreference() {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getDefaultPreference();
+        return null;
+    }
+
+    @Override
+    public String getDeviceId() {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            application.getDeviceId();
+        return null;
+    }
+
+
     @Override
     public boolean send(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
         HsFirebaseApplication application = getHsFirebaseApplication();
@@ -156,11 +177,5 @@ public class HsFirebaseActivity extends HsActivity implements IHsFirebaseActivit
             return application.send(serverKey, to, payload, listener);
         }
         return false;
-    }
-
-    @Override
-    public HsFirebaseApplication getHsFirebaseApplication() {
-        HsFirebaseApplication application = (HsFirebaseApplication) getHsApplication();
-        return application;
     }
 }

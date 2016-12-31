@@ -8,12 +8,25 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import kr.co.hs.app.HsApplication;
 import kr.co.hs.firebase.IHsFirebaseApplication;
 import kr.co.hs.firebase.auth.HsFirebaseAuth;
+import kr.co.hs.firebase.cloudmessaging.HsFirebaseMessaging;
+import kr.co.hs.firebase.cloudmessaging.HsFirebaseMessagingInfo;
+import kr.co.hs.net.HsRestClient;
 
 /**
  * Created by Bae on 2016-12-25.
@@ -24,6 +37,7 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
     private String mFirebaseToken = null;
     private FirebaseAnalytics mFirebaseAnalytics = null;
     private HsFirebaseAuth mFirebaseAuth = null;
+    private HsFirebaseMessaging mFirebaseMessaging = null;
 
     @Override
     public void init() {
@@ -32,6 +46,7 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
         setFirebaseAnalyticsUserProperty();
         mFirebaseAuth = HsFirebaseAuth.getInstance();
+        mFirebaseMessaging = HsFirebaseMessaging.getInstance();
     }
 
     @Override
@@ -115,6 +130,54 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
             if(listener != null)
                 listener.onFailure(new NullPointerException("FirebaseAuth is Null"));
         }
+    }
+
+    @Override
+    public boolean subscribe(String topic) {
+        HsFirebaseMessaging.getInstance().subscribe(topic);
+        return true;
+    }
+
+    @Override
+    public boolean unsubscribe(String topic) {
+        HsFirebaseMessaging.getInstance().unsubscribe(topic);
+        return true;
+    }
+
+    @Override
+    public boolean send(RemoteMessage remoteMessage) {
+        HsFirebaseMessaging.getInstance().send(remoteMessage);
+        return true;
+    }
+
+    @Override
+    public HsFirebaseMessagingInfo getFirebaseMessagingInfo(String serverKey) {
+        HsRestClient client = new HsRestClient();
+        Map<String, String> header = new HashMap<>();
+        header.put("Authorization", "key="+serverKey);
+        String response = client.get(String.format(HsFirebaseMessagingInfo.HOST_IID, getFirebaseToken()), header, 10000);
+        try {
+            return new HsFirebaseMessagingInfo(response);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public boolean send(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
+        String target[] = new String[1];
+        target[0] = to;
+        HsFirebaseMessaging.CloudMessagingSendJob job = new HsFirebaseMessaging.CloudMessagingSendJob(mFirebaseMessaging, serverKey, target, payload, listener);
+        mFirebaseMessaging.getExecutor().execute(job);
+        return true;
+    }
+
+    @Override
+    public boolean send(String serverKey, String[] to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
+        HsFirebaseMessaging.CloudMessagingSendJob job = new HsFirebaseMessaging.CloudMessagingSendJob(mFirebaseMessaging, serverKey, to, payload, listener);
+        mFirebaseMessaging.getExecutor().execute(job);
+        return true;
     }
 
     void setFirebaseToken(String token){

@@ -6,11 +6,15 @@ import android.os.Bundle;
 
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.Map;
 
 import kr.co.hs.app.HsFragment;
 import kr.co.hs.firebase.IHsFirebaseApplication;
 import kr.co.hs.firebase.IHsFirebaseFragment;
 import kr.co.hs.firebase.auth.HsFirebaseAuth;
+import kr.co.hs.firebase.cloudmessaging.HsFirebaseMessagingInfo;
 
 /**
  * Created by Bae on 2016-12-25.
@@ -105,5 +109,59 @@ public abstract class HsFirebaseFragment extends HsFragment implements IHsFireba
         HsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             application.signInWithCredential(credential, listener);
+    }
+
+    @Override
+    public boolean subscribe(String topic) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.subscribe(topic);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean unsubscribe(String topic) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.unsubscribe(topic);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean send(RemoteMessage remoteMessage) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.send(remoteMessage);
+        }
+        return false;
+    }
+
+    @Override
+    public HsFirebaseMessagingInfo getFirebaseMessagingInfo(String serverKey) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.getFirebaseMessagingInfo(serverKey);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean send(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.send(serverKey, to, payload, listener);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean send(String serverKey, String[] to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.send(serverKey, to, payload, listener);
+        }
+        return false;
     }
 }
