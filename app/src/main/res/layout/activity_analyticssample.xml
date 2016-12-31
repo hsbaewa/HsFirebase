@@ -6,10 +6,9 @@
 
     <include layout="@layout/layout_appbar"/>
 
-    <kr.co.hs.widget.recyclerview.HsRecyclerView
-        android:id="@+id/RecyclerView"
+    <TextView
+        android:id="@+id/TextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content" />
 
-    </kr.co.hs.widget.recyclerview.HsRecyclerView>
 </LinearLayout>

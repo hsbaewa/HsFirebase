@@ -9,12 +9,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".SampleActivity">
+        <activity android:name=".SampleActivity"
+            android:label="Sample">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER"/>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
+        <activity android:name=".RemoteConfigSampleActivity"
+            android:label="RemoteConfigSample"/>
+        <activity android:name=".AnalyticsSampleActivity"
+            android:label="AnalyticsSample"/>
 
     </application>
 

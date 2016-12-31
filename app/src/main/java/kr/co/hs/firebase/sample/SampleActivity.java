@@ -1,87 +1,106 @@
 package kr.co.hs.firebase.sample;
 
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.widget.Button;
-import android.widget.EditText;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.Map;
 
-import kr.co.hs.firebase.app.HsFirebaseRemoteConfigActivity;
-import kr.co.hs.firebase.remoteconfig.HsFirebaseRemoteConfig;
+import kr.co.hs.widget.recyclerview.HsRecyclerView;
 
 /**
  * Created by Bae on 2016-12-29.
  */
-public class SampleActivity extends HsFirebaseRemoteConfigActivity {
+public class SampleActivity extends BaseActivity implements HsRecyclerView.OnItemClickListener{
 
-    private static final String VALUE_TEXTVIEW = "value_textview";
-    private static final String VALUE_EDIT_HINT = "value_edit_hint";
-    private static final String VALUE_BUTTON_TEXT = "value_button_text";
-    private static final int HD_SET_VALUE = 100;
-
-
-    TextView textView;
-    EditText editText;
-    Button button;
+    HsRecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_sample);
         super.onCreate(savedInstanceState);
 
-        textView = (TextView) findViewById(R.id.TextView);
-        editText = (EditText) findViewById(R.id.EditText);
-        button = (Button) findViewById(R.id.Button);
+        mRecyclerView = (HsRecyclerView) findViewById(R.id.RecyclerView);
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(llm);
+
+        mRecyclerView.setAdapter(new SampleAdapter());
+
+        mRecyclerView.setOnItemClickListener(this);
     }
 
     @Override
-    protected void setDefaults(Map<String, Object> map) {
-        map.put(VALUE_TEXTVIEW, "default");
-        map.put(VALUE_EDIT_HINT, "default");
-        map.put(VALUE_BUTTON_TEXT, "default");
+    protected void onResume() {
+        super.onResume();
+        setFirebaseAnalyticsCurrentScreen(this, "SampleActivity", null);
     }
 
     @Override
-    public boolean handleMessage(Message msg) {
-        if(super.handleMessage(msg))
-            return true;
+    protected void onPause() {
+        super.onPause();
+    }
 
-        switch (msg.what){
-            case HD_SET_VALUE:{
+    @Override
+    public void onItemClick(HsRecyclerView hsRecyclerView, View view, int i) {
+        switch (i){
+            case 0:{
+                Intent intent = new Intent(getContext(), RemoteConfigSampleActivity.class);
+                startActivity(intent);
 
-                Bundle data = msg.getData();
-                String textview = data.getString(VALUE_TEXTVIEW);
-                String edit = data.getString(VALUE_EDIT_HINT);
-                String button = data.getString(VALUE_BUTTON_TEXT);
-
-                textView.setText(textview);
-                editText.setHint(edit);
-                this.button.setText(button);
-
-                return true;
+                Bundle param = new Bundle();
+                param.putString("name", "RemoteConfigSampleActivity");
+                sendFirebaseAnalyticsLogEvent("Activity", param);
+                break;
             }
-            default:return false;
+            case 1:{
+                Intent intent = new Intent(getContext(), AnalyticsSampleActivity.class);
+                startActivity(intent);
+
+                Bundle param = new Bundle();
+                param.putString("name", "AnalyticsSampleActivity");
+                sendFirebaseAnalyticsLogEvent("Activity", param);
+                break;
+            }
         }
     }
 
-    @Override
-    public void onSuccessfulActivateFetched(HsFirebaseRemoteConfig remoteConfig) {
-        String btnText = getRemoteConfigString(VALUE_BUTTON_TEXT);
-        String textviewText = getRemoteConfigString(VALUE_TEXTVIEW);
-        String editHint = getRemoteConfigString(VALUE_EDIT_HINT);
+    class SampleAdapter extends HsRecyclerView.HsAdapter<SampleAdapter.SampleViewHolder>{
+        @Override
+        public SampleViewHolder onCreateHsViewHolder(ViewGroup viewGroup, int i) {
+            return new SampleViewHolder(LayoutInflater.from(getContext()).inflate(R.layout.viewholder_sample, viewGroup, false));
+        }
 
-        Bundle bundle = new Bundle();
-        bundle.putString(VALUE_BUTTON_TEXT, btnText);
-        bundle.putString(VALUE_TEXTVIEW, textviewText);
-        bundle.putString(VALUE_EDIT_HINT, editHint);
-        sendMessage(HD_SET_VALUE, bundle);
-    }
+        @Override
+        public void onBindHsViewHolder(SampleViewHolder holder, int i, boolean b) {
+            switch (i){
+                case 0:{
+                    holder.textView.setText("RemoteConfigSample");
+                    break;
+                }
+                case 1:{
+                    holder.textView.setText("Analytics");
+                    break;
+                }
+            }
+        }
 
-    @Override
-    public void onFailureActivateFetched(HsFirebaseRemoteConfig remoteConfig) {
+        @Override
+        public int getItemCount() {
+            return 2;
+        }
 
+        class SampleViewHolder extends HsRecyclerView.HsViewHolder{
+            TextView textView;
+            public SampleViewHolder(View itemView) {
+                super(itemView);
+                textView = (TextView) findViewById(R.id.TextView);
+            }
+        }
     }
 }
