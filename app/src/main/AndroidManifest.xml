@@ -22,6 +22,8 @@
             android:label="AnalyticsSample"/>
         <activity android:name=".AuthSampleActivity"
             android:label="AuthSample"/>
+        <activity android:name=".GoogleAuthSampleActivity"
+            android:label="GoogleAuthSample"/>
 
     </application>
 
