@@ -24,6 +24,15 @@
             android:label="AuthSample"/>
         <activity android:name=".GoogleAuthSampleActivity"
             android:label="GoogleAuthSample"/>
+        <activity android:name=".FCMSampleActivity"
+            android:label="FCMSample"/>
+
+
+        <service android:name=".SampleFCMService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
 
     </application>
 

@@ -85,6 +85,15 @@ public class SampleActivity extends BaseActivity implements HsRecyclerView.OnIte
                 sendFirebaseAnalyticsLogEvent("Activity", param);
                 break;
             }
+            case 4:{
+                Intent intent = new Intent(getContext(), FCMSampleActivity.class);
+                startActivity(intent);
+
+                Bundle param = new Bundle();
+                param.putString("name", "FCMSampleActivity");
+                sendFirebaseAnalyticsLogEvent("Activity", param);
+                break;
+            }
         }
     }
 
@@ -113,13 +122,16 @@ public class SampleActivity extends BaseActivity implements HsRecyclerView.OnIte
                     holder.textView.setText("GoogleAuth");
                     break;
                 }
-
+                case 4:{
+                    holder.textView.setText("FCM");
+                    break;
+                }
             }
         }
 
         @Override
         public int getItemCount() {
-            return 4;
+            return 5;
         }
 
         class SampleViewHolder extends HsRecyclerView.HsViewHolder{

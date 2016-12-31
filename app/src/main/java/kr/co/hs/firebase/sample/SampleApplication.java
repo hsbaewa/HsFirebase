@@ -7,4 +7,11 @@ import kr.co.hs.firebase.app.HsFirebaseApplication;
  */
 
 public class SampleApplication extends HsFirebaseApplication {
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        subscribe("lobby");
+    }
 }
