@@ -20,6 +20,8 @@
             android:label="RemoteConfigSample"/>
         <activity android:name=".AnalyticsSampleActivity"
             android:label="AnalyticsSample"/>
+        <activity android:name=".AuthSampleActivity"
+            android:label="AuthSample"/>
 
     </application>
 
