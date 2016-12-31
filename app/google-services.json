@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "384964015838",
+    "firebase_url": "https://causal-sunspot-91903.firebaseio.com",
+    "project_id": "causal-sunspot-91903",
+    "storage_bucket": "causal-sunspot-91903.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384964015838:android:11ed1aaff54a64eb",
+        "android_client_info": {
+          "package_name": "kr.co.hs.firebase.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384964015838-m8a5k8eibqrvmhuogcgphkq19pptdreo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.co.hs.firebase.sample",
+            "certificate_hash": "527353A8245716556D2866EB1ABF6BB4ED1D3425"
+          }
+        },
+        {
+          "client_id": "384964015838-lvddh74n4ojjg9davv5f2crj2dikcghp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa7hxmUNHzgBqyi5xOcCRHnQlKnSa-U2o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384964015838-lvddh74n4ojjg9davv5f2crj2dikcghp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
