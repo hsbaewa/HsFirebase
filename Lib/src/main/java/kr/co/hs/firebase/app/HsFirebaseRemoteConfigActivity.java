@@ -19,6 +19,12 @@ public abstract class HsFirebaseRemoteConfigActivity extends HsFirebaseActivity 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFirebaseRemoteConfig = HsFirebaseRemoteConfig.getInstance();
+
+        getRemoteConfig().syncConfig(0, this);
+        Map<String, Object> defaults = new HashMap<>();
+        setDefaults(defaults);
+        if(defaults.size() > 0)
+            getRemoteConfig().setDefaults(defaults);
     }
 
     public HsFirebaseRemoteConfig getRemoteConfig(){
@@ -28,11 +34,6 @@ public abstract class HsFirebaseRemoteConfigActivity extends HsFirebaseActivity 
     @Override
     protected void onResume() {
         super.onResume();
-        getRemoteConfig().syncConfig(0, this);
-        Map<String, Object> defaults = new HashMap<>();
-        setDefaults(defaults);
-        if(defaults.size() > 0)
-            getRemoteConfig().setDefaults(defaults);
     }
 
     public String getRemoteConfigString(String key){
