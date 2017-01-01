@@ -7,12 +7,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -73,7 +67,7 @@ public class HsFirebaseMessaging {
 
         JSONObject object = new JSONObject();
         object.put("to", to);
-        object.put("message", payloadObj.toJSONString());
+        object.put("data", payloadObj);
 
         String response = client.post(FCM_SEND_HOST, header, object.toJSONString(), 10000);
 
@@ -105,7 +99,7 @@ public class HsFirebaseMessaging {
 
         JSONObject object = new JSONObject();
         object.put("condition", cond);
-        object.put("message", payloadObj.toJSONString());
+        object.put("data", payloadObj);
 
         String response = client.post(FCM_SEND_HOST, header, object.toJSONString(), 10000);
 
@@ -142,25 +136,29 @@ public class HsFirebaseMessaging {
             }
 
             if(response == null || response.length() == 0){
-                listener.onFail(null);
+                if(listener != null)
+                    listener.onFail(null);
             }else{
                 JSONParser parser = new JSONParser();
                 try {
                     JSONObject object = (JSONObject) parser.parse(response);
 
                     if(object.containsKey("message_id")){
-                        String msg_id = (String) object.get("message_id");
-                        long msgId = Long.parseLong(msg_id);
-                        listener.onSuccess(msgId);
+                        long msg_id = (long) object.get("message_id");
+                        if(listener != null)
+                            listener.onSuccess(msg_id);
                     }else if(object.containsKey("error")){
                         String error = (String) object.get("error");
-                        listener.onFail(error);
+                        if(listener != null)
+                            listener.onFail(error);
                     }else{
-                        listener.onFail(null);
+                        if(listener != null)
+                            listener.onFail(null);
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
-                    listener.onFail(e.getMessage());
+                    if(listener != null)
+                        listener.onFail(e.getMessage());
                 }
             }
         }
