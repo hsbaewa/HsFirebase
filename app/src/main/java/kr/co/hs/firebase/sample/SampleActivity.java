@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import kr.co.hs.widget.recyclerview.HsRecyclerView;
+
 
 /**
  * Created by Bae on 2016-12-29.

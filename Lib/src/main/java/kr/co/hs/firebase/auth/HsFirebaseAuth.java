@@ -8,6 +8,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by Bae on 2016-12-31.
@@ -80,17 +81,19 @@ public class HsFirebaseAuth extends FirebaseAuth {
     class HsAuthStateListener implements AuthStateListener{
         HsFirebaseAuth auth;
         OnFirebaseSignOutResultListener listener;
+        FirebaseUser beforeUser;
 
         public HsAuthStateListener(HsFirebaseAuth auth, OnFirebaseSignOutResultListener listener) {
             this.auth = auth;
             this.listener = listener;
+            this.beforeUser = this.auth.getCurrentUser();
         }
 
         @Override
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
             if(firebaseAuth.getCurrentUser() == null){
                 this.auth.removeAuthStateListener(this);
-                this.listener.onSignOut();
+                this.listener.onSignOut(this.beforeUser);
             }
         }
     }
@@ -101,6 +104,6 @@ public class HsFirebaseAuth extends FirebaseAuth {
     }
 
     public interface OnFirebaseSignOutResultListener{
-        void onSignOut();
+        void onSignOut(FirebaseUser beforeFirebaseUser);
     }
 }

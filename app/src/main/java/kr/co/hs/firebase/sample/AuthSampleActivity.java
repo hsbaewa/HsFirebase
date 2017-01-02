@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 
 import kr.co.hs.firebase.app.HsFirebaseAuthActivity;
 import kr.co.hs.util.Logger;
@@ -56,7 +57,7 @@ public class AuthSampleActivity extends HsFirebaseAuthActivity implements View.O
     }
 
     @Override
-    public void onSignOut() {
+    public void onSignOut(FirebaseUser beforeFirebaseUser) {
 
     }
 }

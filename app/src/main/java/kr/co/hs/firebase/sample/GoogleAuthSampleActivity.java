@@ -85,8 +85,10 @@ public class GoogleAuthSampleActivity extends HsFirebaseGoogleAuthActivity imple
         }
     }
 
+
     @Override
-    public void onSignOut() {
+    public void onSignOut(FirebaseUser beforeFirebaseUser) {
+        String email = beforeFirebaseUser.getEmail();
         btn.setText("로그인");
     }
 }
