@@ -20,17 +20,6 @@ public class HsFirebaseMessagingInfo {
     public static final String CONNECTION_TYPE_MOBILE = "MOBILE";
     public static final String PLATFORM_ANDROID = "ANDROID";
 
-//    {"applicationVersion":"1",
-//            "connectDate":"2016-12-23",
-//            "attestStatus":"UNKNOWN",
-//            "application":"kr.co.hsbaewa.footprinttalk",
-//            "scope":"*",
-//            "authorizedEntity":"229860847435",
-//            "rel":{"topics":{"hsbaewa":{"addDate":"2016-12-24"}}},
-//        "connectionType":"MOBILE",
-//            "appSigner":"527353a8245716556d2866eb1abf6bb4ed1d3425",
-//            "platform":"ANDROID"}
-
     String applicationVersion;
     String connectDate;
     String attestStatus;
@@ -101,7 +90,45 @@ public class HsFirebaseMessagingInfo {
         return result;
     }
 
+    public String getApplicationVersion() {
+        return applicationVersion;
+    }
 
+    public String getConnectDate() {
+        return connectDate;
+    }
+
+    public String getAttestStatus() {
+        return attestStatus;
+    }
+
+    public String getApplication() {
+        return application;
+    }
+
+    public String getScope() {
+        return scope;
+    }
+
+    public String getAuthorizedEntity() {
+        return authorizedEntity;
+    }
+
+    public String getConnectionType() {
+        return connectionType;
+    }
+
+    public String getAppSigner() {
+        return appSigner;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
 
     public static class Topic{
         public static final String EXTRA_ADD_DATE = "addDate";
