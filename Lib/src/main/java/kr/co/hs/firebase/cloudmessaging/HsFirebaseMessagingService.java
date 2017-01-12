@@ -1,6 +1,7 @@
 package kr.co.hs.firebase.cloudmessaging;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.firebase.auth.AuthCredential;
@@ -11,7 +12,7 @@ import com.google.firebase.messaging.RemoteMessage;
 import java.util.Map;
 
 import kr.co.hs.content.HsPreferences;
-import kr.co.hs.firebase.IHsFirebase;
+import kr.co.hs.firebase.IHsFirebaseService;
 import kr.co.hs.firebase.app.HsFirebaseApplication;
 import kr.co.hs.firebase.auth.HsFirebaseAuth;
 
@@ -19,7 +20,7 @@ import kr.co.hs.firebase.auth.HsFirebaseAuth;
  * Created by Bae on 2016-12-31.
  */
 
-public class HsFirebaseMessagingService extends FirebaseMessagingService implements IHsFirebase{
+public class HsFirebaseMessagingService extends FirebaseMessagingService implements IHsFirebaseService{
     @Override
     public String getFirebaseToken() {
         HsFirebaseApplication application = getHsFirebaseApplication();
@@ -177,5 +178,37 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
             return application.send(serverKey, to, payload, listener);
         }
         return false;
+    }
+
+    @Override
+    public String getRemoteClassName(Intent intent) {
+        return intent.getStringExtra(EXTRA_REMOTE_CLASS);
+    }
+
+    @Override
+    public boolean sendPendingBroadcast(int i, Intent intent, int i1) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.sendPendingBroadcast(i, intent, i1);
+        else
+            return false;
+    }
+
+    @Override
+    public boolean sendPendingBroadcast(int i, Intent intent) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.sendPendingBroadcast(i, intent);
+        else
+            return false;
+    }
+
+    @Override
+    public boolean sendPendingBroadcast(Intent intent) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.sendPendingBroadcast(intent);
+        else
+            return false;
     }
 }

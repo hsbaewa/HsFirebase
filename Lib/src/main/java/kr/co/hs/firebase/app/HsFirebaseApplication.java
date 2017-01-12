@@ -40,8 +40,8 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
     private HsFirebaseMessaging mFirebaseMessaging = null;
 
     @Override
-    public void init() {
-        super.init();
+    public void onCreate() {
+        super.onCreate();
         mFirebaseToken = FirebaseInstanceId.getInstance().getToken();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
         setFirebaseAnalyticsUserProperty();
