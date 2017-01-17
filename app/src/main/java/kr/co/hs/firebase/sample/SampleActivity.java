@@ -94,6 +94,11 @@ public class SampleActivity extends BaseActivity implements HsRecyclerView.OnIte
                 sendFirebaseAnalyticsLogEvent("Activity", param);
                 break;
             }
+            case 5:{
+                Intent intent = new Intent(getContext(), DatabaseSampleActivity.class);
+                startActivity(intent);
+                break;
+            }
         }
     }
 
@@ -124,6 +129,10 @@ public class SampleActivity extends BaseActivity implements HsRecyclerView.OnIte
                 }
                 case 4:{
                     holder.textView.setText("FCM");
+                    break;
+                }
+                case 5:{
+                    holder.textView.setText("Database");
                     break;
                 }
             }
