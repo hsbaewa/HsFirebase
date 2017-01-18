@@ -140,7 +140,7 @@ public class SampleActivity extends BaseActivity implements HsRecyclerView.OnIte
 
         @Override
         public int getItemCount() {
-            return 5;
+            return 6;
         }
 
         class SampleViewHolder extends HsRecyclerView.HsViewHolder{

@@ -26,6 +26,7 @@
             android:label="GoogleAuthSample"/>
         <activity android:name=".FCMSampleActivity"
             android:label="FCMSample"/>
+        <activity android:name=".DatabaseSampleActivity"/>
 
 
         <service android:name=".SampleFCMService">
