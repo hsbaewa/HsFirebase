@@ -4,8 +4,11 @@ package kr.co.hs.firebase.app;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Map;
@@ -156,6 +159,50 @@ public class HsFirebaseActivity extends HsActivity implements IHsFirebaseActivit
             return application.send(serverKey, to, payload, listener);
         }
         return false;
+    }
+
+    @Override
+    public FirebaseDatabase getFirebaseDatabase() {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.getFirebaseDatabase();
+        }
+        return null;
+    }
+
+    @Override
+    public DatabaseReference getDatabaseReference() {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.getDatabaseReference();
+        }
+        return null;
+    }
+
+    @Override
+    public DatabaseReference child(String key) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.child(key);
+        }
+        return null;
+    }
+
+    @Override
+    public Task<Void> updateChildren(Map<String, Object> map) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.updateChildren(map);
+        }
+        return null;
+    }
+
+    @Override
+    public void updateChildren(Map<String, Object> map, DatabaseReference.CompletionListener listener) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            application.updateChildren(map, listener);
+        }
     }
 
     @Override

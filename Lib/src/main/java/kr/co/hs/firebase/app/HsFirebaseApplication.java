@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
@@ -180,6 +183,34 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
         return true;
     }
 
+
+
+    @Override
+    public FirebaseDatabase getFirebaseDatabase() {
+        return FirebaseDatabase.getInstance();
+    }
+
+    @Override
+    public DatabaseReference getDatabaseReference() {
+        return getFirebaseDatabase().getReference();
+    }
+
+    @Override
+    public DatabaseReference child(String key) {
+        return getDatabaseReference().child(key);
+    }
+
+    @Override
+    public Task<Void> updateChildren(Map<String, Object> map) {
+        return getDatabaseReference().updateChildren(map);
+    }
+
+    @Override
+    public void updateChildren(Map<String, Object> map, DatabaseReference.CompletionListener listener) {
+        getDatabaseReference().updateChildren(map, listener);
+    }
+
+
     void setFirebaseToken(String token){
         this.mFirebaseToken = token;
     }
@@ -208,33 +239,6 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
             mFirebaseAnalytics.setUserProperty(USER, Build.USER);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             mFirebaseAnalytics.setUserProperty(TIME, sdf.format(Build.TIME));
-            /*
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                String[] abis = Build.SUPPORTED_ABIS;
-                String strABIS = "";
-                if(abis.length > 0){
-                    strABIS += abis[0];
-                    for(int i=1;i<abis.length;i++)
-                        strABIS += ", "+abis[i];
-                }
-
-                String[] abis32 = Build.SUPPORTED_32_BIT_ABIS;
-                String strABIS32 = "";
-                if(abis32.length > 0){
-                    strABIS32 += abis32[0];
-                    for(int i=0;i<abis32.length;i++)
-                        strABIS32 += ", "+abis32[i];
-                }
-
-                String[] abis64 = Build.SUPPORTED_64_BIT_ABIS;
-                String strABIS64 = "";
-                if(abis64.length > 0){
-                    strABIS64 = abis64[0];
-                    for(int i=0;i<abis64.length;i++)
-                        strABIS64 += ", "+abis64[i];
-                }
-            }
-            &*/
         }
     }
 }

@@ -8,9 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+
+import kr.co.hs.firebase.app.HsFirebaseDatabaseActivity;
 import kr.co.hs.widget.recyclerview.HsRecyclerView;
 
 /**
@@ -19,13 +22,14 @@ import kr.co.hs.widget.recyclerview.HsRecyclerView;
  * 패키지명 : kr.co.hs.firebase.sample
  */
 
-public class DatabaseSampleActivity extends BaseActivity {
+public class DatabaseSampleActivity extends HsFirebaseDatabaseActivity {
 
     private HsRecyclerView mHsRecyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_databasesample);
 
         mHsRecyclerView = (HsRecyclerView) findViewById(R.id.RecyclerView);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
@@ -36,14 +40,41 @@ public class DatabaseSampleActivity extends BaseActivity {
         Adapter adapter = new Adapter();
         mHsRecyclerView.setAdapter(adapter);
 
-        DatabaseReference mDatabaseReference;
 
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference();
 
+//        mDatabaseReference.child("hsUsers").child("a").setValue("AAAAAA");
+
+//        DatabaseUser user = new DatabaseUser("바뀐거???????", "dsgffdsgfdsgfdsgfdgfdgfd??");
+//
+//        String key = child("users").push().getKey();
+//
+//        Map<String, Object> updates = new HashMap<>();
+//        updates.put("/users/"+key, user);
+//
+//        updateChildren(updates);
+
+        addChildEventListener(getDatabaseReference().child("hsUsers"));
     }
 
+    @Override
+    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+        super.onChildMoved(dataSnapshot, s);
+    }
 
+    @Override
+    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+        super.onChildChanged(dataSnapshot, s);
+    }
 
+    @Override
+    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+        super.onChildAdded(dataSnapshot, s);
+    }
+
+    @Override
+    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+    }
 
     class Adapter extends HsRecyclerView.HsAdapter<Holder>{
 

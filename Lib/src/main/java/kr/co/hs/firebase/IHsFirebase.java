@@ -4,8 +4,11 @@ package kr.co.hs.firebase;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Map;
@@ -69,4 +72,12 @@ public interface IHsFirebase extends IHs {
     HsFirebaseMessagingInfo getFirebaseMessagingInfo(String serverKey);
     boolean send(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener);
     boolean send(String serverKey, String[] to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener);
+
+
+    //FirebaseDatabse 관련
+    FirebaseDatabase getFirebaseDatabase();
+    DatabaseReference getDatabaseReference();
+    DatabaseReference child(String key);
+    Task<Void> updateChildren(Map<String, Object> map);
+    void updateChildren(Map<String, Object> map , DatabaseReference.CompletionListener listener);
 }
