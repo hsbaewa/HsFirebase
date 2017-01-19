@@ -11,6 +11,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Map;
 
@@ -257,5 +259,23 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
             return application.sendPendingBroadcast(intent);
         else
             return false;
+    }
+
+    @Override
+    public FirebaseStorage getFirebaseStorage() {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.getFirebaseStorage();
+        }
+        return null;
+    }
+
+    @Override
+    public StorageReference getStorageReference(String Url) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.getStorageReference(Url);
+        }
+        return null;
     }
 }

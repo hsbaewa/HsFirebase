@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Map;
 
@@ -203,6 +205,24 @@ public class HsFirebaseActivity extends HsActivity implements IHsFirebaseActivit
         if(application != null){
             application.updateChildren(map, listener);
         }
+    }
+
+    @Override
+    public FirebaseStorage getFirebaseStorage() {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.getFirebaseStorage();
+        }
+        return null;
+    }
+
+    @Override
+    public StorageReference getStorageReference(String Url) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.getStorageReference(Url);
+        }
+        return null;
     }
 
     @Override

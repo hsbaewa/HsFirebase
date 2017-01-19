@@ -11,18 +11,15 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import kr.co.hs.app.HsApplication;
 import kr.co.hs.firebase.IHsFirebaseApplication;
@@ -208,6 +205,16 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
     @Override
     public void updateChildren(Map<String, Object> map, DatabaseReference.CompletionListener listener) {
         getDatabaseReference().updateChildren(map, listener);
+    }
+
+    @Override
+    public FirebaseStorage getFirebaseStorage() {
+        return FirebaseStorage.getInstance();
+    }
+
+    @Override
+    public StorageReference getStorageReference(String url) {
+        return getFirebaseStorage().getReferenceFromUrl(url);
     }
 
 

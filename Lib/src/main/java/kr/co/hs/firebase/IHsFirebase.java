@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.RemoteMessage;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Map;
 
@@ -48,6 +50,10 @@ public interface IHsFirebase extends IHs {
     String SUPPORTED_32_BIT_ABIS = "SUPPORTED_32_BIT_ABIS";
     String SUPPORTED_64_BIT_ABIS = "SUPPORTED_64_BIT_ABIS";
 
+    String EXTRA_URI = "Uri";
+    String EXTRA_FILE = "File";
+
+
     String getFirebaseToken();
 
     //Analytics 관련
@@ -80,4 +86,10 @@ public interface IHsFirebase extends IHs {
     DatabaseReference child(String key);
     Task<Void> updateChildren(Map<String, Object> map);
     void updateChildren(Map<String, Object> map , DatabaseReference.CompletionListener listener);
+
+
+
+    //FirebaseStorage 관련
+    FirebaseStorage getFirebaseStorage();
+    StorageReference getStorageReference(String Url);
 }
