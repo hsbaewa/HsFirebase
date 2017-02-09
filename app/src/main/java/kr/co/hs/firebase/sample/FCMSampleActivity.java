@@ -28,7 +28,7 @@ public class FCMSampleActivity extends HsFirebaseActivity {
         Map<String, String> map = new HashMap<>();
         map.put("key","data");
         String server = "AAAAWaGktt4:APA91bEefJMUTM_hkEev-3ULLt52T-j7O2HUDlTNN21RI88nCMXu1YOpUE27oYc10MXEQ-3Eq91Ur-CBf3N32w_tuzUrrJEBt8TuEo_2bmvlBmnBGnwiaLYod8EQzpm_ML9fxXlZdN_8g600rpp88wndI1TsD3Cndw";
-        send(server, "/topics/lobby", map, null);
+        sendToTopic(server, "lobby", map, null);
 
     }
 }

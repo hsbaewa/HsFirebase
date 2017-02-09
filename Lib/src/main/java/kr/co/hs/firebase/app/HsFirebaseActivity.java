@@ -164,6 +164,15 @@ public class HsFirebaseActivity extends HsActivity implements IHsFirebaseActivit
     }
 
     @Override
+    public boolean sendToTopic(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.sendToTopic(serverKey, to, payload, listener);
+        }
+        return false;
+    }
+
+    @Override
     public FirebaseDatabase getFirebaseDatabase() {
         HsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){

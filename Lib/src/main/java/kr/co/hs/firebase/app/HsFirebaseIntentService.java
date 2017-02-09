@@ -145,6 +145,15 @@ public abstract class HsFirebaseIntentService extends HsIntentService implements
     }
 
     @Override
+    public boolean sendToTopic(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            return application.sendToTopic(serverKey, to, payload, listener);
+        }
+        return false;
+    }
+
+    @Override
     public HsFirebaseMessagingInfo getFirebaseMessagingInfo(String serverKey) {
         HsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){

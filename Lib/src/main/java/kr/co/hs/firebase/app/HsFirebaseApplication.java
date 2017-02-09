@@ -180,6 +180,14 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
         return true;
     }
 
+    @Override
+    public boolean sendToTopic(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
+        String target[] = new String[1];
+        target[0] = String.format("/topics/%s",to);
+        HsFirebaseMessaging.CloudMessagingSendJob job = new HsFirebaseMessaging.CloudMessagingSendJob(mFirebaseMessaging, serverKey, target, payload, listener);
+        mFirebaseMessaging.getExecutor().execute(job);
+        return true;
+    }
 
 
     @Override

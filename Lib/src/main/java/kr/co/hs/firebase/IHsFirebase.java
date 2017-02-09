@@ -78,6 +78,8 @@ public interface IHsFirebase extends IHs {
     HsFirebaseMessagingInfo getFirebaseMessagingInfo(String serverKey);
     boolean send(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener);
     boolean send(String serverKey, String[] to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener);
+    boolean sendToTopic(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener);
+
 
 
     //FirebaseDatabse 관련
