@@ -153,7 +153,7 @@ public class HsFirebaseMessaging {
                             listener.onFail(error);
                     }else{
                         if(listener != null)
-                            listener.onFail(null);
+                            listener.onFail(response);
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
