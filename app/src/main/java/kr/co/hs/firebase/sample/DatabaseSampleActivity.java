@@ -89,7 +89,7 @@ public class DatabaseSampleActivity extends HsFirebaseDatabaseActivity {
         }
 
         @Override
-        public int getItemCount() {
+        public int getHsItemCount() {
             return 0;
         }
     }

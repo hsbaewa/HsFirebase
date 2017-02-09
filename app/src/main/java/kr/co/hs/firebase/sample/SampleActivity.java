@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,7 @@ public class SampleActivity extends BaseActivity implements HsRecyclerView.OnIte
     }
 
     @Override
-    public void onItemClick(HsRecyclerView hsRecyclerView, View view, int i) {
+    public void onItemClick(HsRecyclerView hsRecyclerView, RecyclerView.ViewHolder viewHolder, View view, int i) {
         switch (i){
             case 0:{
                 Intent intent = new Intent(getContext(), RemoteConfigSampleActivity.class);
@@ -139,7 +140,7 @@ public class SampleActivity extends BaseActivity implements HsRecyclerView.OnIte
         }
 
         @Override
-        public int getItemCount() {
+        public int getHsItemCount() {
             return 6;
         }
 
