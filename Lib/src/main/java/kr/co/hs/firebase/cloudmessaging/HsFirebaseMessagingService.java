@@ -14,8 +14,10 @@ import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.Map;
 
+import kr.co.hs.app.HsActivity;
 import kr.co.hs.content.HsPreferences;
 import kr.co.hs.firebase.IHsFirebaseService;
 import kr.co.hs.firebase.app.HsFirebaseApplication;
@@ -163,6 +165,22 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
         HsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             application.getDeviceId();
+        return null;
+    }
+
+    @Override
+    public ArrayList<HsActivity.ActivityStatus> getActivityStatusList() {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getActivityStatusList();
+        return null;
+    }
+
+    @Override
+    public String getTopActivity() {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getTopActivity();
         return null;
     }
 
