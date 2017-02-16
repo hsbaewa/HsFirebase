@@ -15,6 +15,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import kr.co.hs.app.HsActivity;
@@ -286,6 +287,22 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
             return application.sendPendingBroadcast(intent);
         else
             return false;
+    }
+
+    @Override
+    public List<String> getRunningServiceClassName() {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getRunningServiceClassName();
+        return null;
+    }
+
+    @Override
+    public boolean isRunningService(Class<?> aClass) {
+        HsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.isRunningService(aClass);
+        return false;
     }
 
     @Override
