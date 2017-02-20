@@ -15,6 +15,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.Map;
 
 import kr.co.hs.app.HsService;
+import kr.co.hs.firebase.IHsFirebaseApplication;
 import kr.co.hs.firebase.IHsFirebaseService;
 import kr.co.hs.firebase.auth.HsFirebaseAuth;
 import kr.co.hs.firebase.cloudmessaging.HsFirebaseMessagingInfo;
@@ -28,8 +29,8 @@ import kr.co.hs.firebase.cloudmessaging.HsFirebaseMessagingInfo;
 public abstract class HsFirebaseService extends HsService implements IHsFirebaseService {
 
     @Override
-    public HsFirebaseApplication getHsFirebaseApplication() {
-        return (HsFirebaseApplication) getApplicationContext();
+    public IHsFirebaseApplication getHsFirebaseApplication() {
+        return (IHsFirebaseApplication) getApplicationContext();
     }
 
     @Override
@@ -61,7 +62,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public boolean setFirebaseAnalyticsCurrentScreen(Activity activity, String screenName, String screenClassOverride) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.setFirebaseAnalyticsCurrentScreen(activity, screenName, screenClassOverride);
         return false;
@@ -69,7 +70,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public HsFirebaseAuth getFirebaseAuth() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.getFirebaseAuth();
         return null;
@@ -86,14 +87,14 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public void createUserWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             application.createUserWithEmailAndPassword(email, password, listener);
     }
 
     @Override
     public void signInWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             application.signInWithEmailAndPassword(email, password, listener);
     }
@@ -105,21 +106,21 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public void signOut(HsFirebaseAuth.OnFirebaseSignOutResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             application.signOut(listener);
     }
 
     @Override
     public void signInWithCredential(AuthCredential credential, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             application.signInWithCredential(credential, listener);
     }
 
     @Override
     public boolean subscribe(String topic) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.subscribe(topic);
         }
@@ -128,7 +129,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public boolean unsubscribe(String topic) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.unsubscribe(topic);
         }
@@ -137,7 +138,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public boolean send(RemoteMessage remoteMessage) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.send(remoteMessage);
         }
@@ -146,7 +147,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public boolean sendToTopic(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.sendToTopic(serverKey, to, payload, listener);
         }
@@ -155,7 +156,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public HsFirebaseMessagingInfo getFirebaseMessagingInfo(String serverKey) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.getFirebaseMessagingInfo(serverKey);
         }
@@ -164,7 +165,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public boolean send(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.send(serverKey, to, payload, listener);
         }
@@ -173,7 +174,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public boolean send(String serverKey, String[] to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.send(serverKey, to, payload, listener);
         }
@@ -182,7 +183,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public FirebaseDatabase getFirebaseDatabase() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.getFirebaseDatabase();
         }
@@ -191,7 +192,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public DatabaseReference getDatabaseReference() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.getDatabaseReference();
         }
@@ -200,7 +201,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public DatabaseReference child(String key) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.child(key);
         }
@@ -209,7 +210,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public Task<Void> updateChildren(Map<String, Object> map) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.updateChildren(map);
         }
@@ -218,7 +219,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public void updateChildren(Map<String, Object> map, DatabaseReference.CompletionListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             application.updateChildren(map, listener);
         }
@@ -226,7 +227,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public FirebaseStorage getFirebaseStorage() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.getFirebaseStorage();
         }
@@ -235,7 +236,7 @@ public abstract class HsFirebaseService extends HsService implements IHsFirebase
 
     @Override
     public StorageReference getStorageReference(String Url) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.getStorageReference(Url);
         }

@@ -20,8 +20,8 @@ import java.util.Map;
 
 import kr.co.hs.app.HsActivity;
 import kr.co.hs.content.HsPreferences;
+import kr.co.hs.firebase.IHsFirebaseApplication;
 import kr.co.hs.firebase.IHsFirebaseService;
-import kr.co.hs.firebase.app.HsFirebaseApplication;
 import kr.co.hs.firebase.auth.HsFirebaseAuth;
 
 /**
@@ -31,7 +31,7 @@ import kr.co.hs.firebase.auth.HsFirebaseAuth;
 public class HsFirebaseMessagingService extends FirebaseMessagingService implements IHsFirebaseService{
     @Override
     public String getFirebaseToken() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.getFirebaseToken();
 
@@ -40,7 +40,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean sendFirebaseAnalyticsLogEvent(String name, Bundle data) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.sendFirebaseAnalyticsLogEvent(name, data);
         return false;
@@ -48,7 +48,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean setFirebaseAnalyticsUserId(String id) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.setFirebaseAnalyticsUserId(id);
         return false;
@@ -56,7 +56,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean setFirebaseAnalyticsCurrentScreen(Activity activity, String screenName, String screenClassOverride) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.setFirebaseAnalyticsCurrentScreen(activity, screenName, screenClassOverride);
         return false;
@@ -64,7 +64,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public HsFirebaseAuth getFirebaseAuth() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.getFirebaseAuth();
         return null;
@@ -81,14 +81,14 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public void createUserWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             application.createUserWithEmailAndPassword(email, password, listener);
     }
 
     @Override
     public void signInWithEmailAndPassword(String email, String password, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             application.signInWithEmailAndPassword(email, password, listener);
     }
@@ -100,21 +100,21 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public void signOut(HsFirebaseAuth.OnFirebaseSignOutResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             application.signOut(listener);
     }
 
     @Override
     public void signInWithCredential(AuthCredential credential, HsFirebaseAuth.OnFirebaseAuthResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             application.signInWithCredential(credential, listener);
     }
 
     @Override
     public boolean subscribe(String topic) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.subscribe(topic);
         }
@@ -123,7 +123,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean unsubscribe(String topic) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.unsubscribe(topic);
         }
@@ -132,7 +132,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean send(RemoteMessage remoteMessage) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.send(remoteMessage);
         }
@@ -141,21 +141,21 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public HsFirebaseMessagingInfo getFirebaseMessagingInfo(String serverKey) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.getFirebaseMessagingInfo(serverKey);
         }
         return null;
     }
 
-    public HsFirebaseApplication getHsFirebaseApplication() {
-        HsFirebaseApplication application = (HsFirebaseApplication) getApplicationContext();
+    public IHsFirebaseApplication getHsFirebaseApplication() {
+        IHsFirebaseApplication application = (IHsFirebaseApplication) getApplicationContext();
         return application;
     }
 
     @Override
     public HsPreferences getDefaultPreference() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.getDefaultPreference();
         return null;
@@ -163,7 +163,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public String getDeviceId() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             application.getDeviceId();
         return null;
@@ -171,7 +171,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public ArrayList<HsActivity.ActivityStatus> getActivityStatusList() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.getActivityStatusList();
         return null;
@@ -179,7 +179,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public String getTopActivity() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.getTopActivity();
         return null;
@@ -188,7 +188,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean send(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.send(serverKey, to, payload, listener);
         }
@@ -197,7 +197,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean send(String serverKey, String[] to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.send(serverKey, to, payload, listener);
         }
@@ -206,7 +206,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean sendToTopic(String serverKey, String to, Map<String, String> payload, HsFirebaseMessagingInfo.OnSendResultListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.sendToTopic(serverKey, to, payload, listener);
         }
@@ -215,7 +215,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public FirebaseDatabase getFirebaseDatabase() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.getFirebaseDatabase();
         }
@@ -224,7 +224,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public DatabaseReference getDatabaseReference() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.getDatabaseReference();
         }
@@ -233,7 +233,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public DatabaseReference child(String key) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.child(key);
         }
@@ -242,7 +242,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public Task<Void> updateChildren(Map<String, Object> map) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.updateChildren(map);
         }
@@ -251,7 +251,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public void updateChildren(Map<String, Object> map, DatabaseReference.CompletionListener listener) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             application.updateChildren(map, listener);
         }
@@ -264,7 +264,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean sendPendingBroadcast(int i, Intent intent, int i1) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.sendPendingBroadcast(i, intent, i1);
         else
@@ -273,7 +273,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean sendPendingBroadcast(int i, Intent intent) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.sendPendingBroadcast(i, intent);
         else
@@ -282,7 +282,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean sendPendingBroadcast(Intent intent) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.sendPendingBroadcast(intent);
         else
@@ -291,7 +291,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public List<String> getRunningServiceClassName() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.getRunningServiceClassName();
         return null;
@@ -299,7 +299,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public boolean isRunningService(Class<?> aClass) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.isRunningService(aClass);
         return false;
@@ -307,7 +307,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public FirebaseStorage getFirebaseStorage() {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.getFirebaseStorage();
         }
@@ -316,7 +316,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
 
     @Override
     public StorageReference getStorageReference(String Url) {
-        HsFirebaseApplication application = getHsFirebaseApplication();
+        IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null){
             return application.getStorageReference(Url);
         }

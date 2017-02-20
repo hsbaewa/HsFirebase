@@ -20,9 +20,13 @@ public class HsFirebaseInstanceIdService extends FirebaseInstanceIdService {
     public void onTokenRefresh() {
         super.onTokenRefresh();
         String token = FirebaseInstanceId.getInstance().getToken();
-        HsFirebaseApplication application = (HsFirebaseApplication) getHsFirebaseApplication();
-        if(application != null)
-            application.setFirebaseToken(token);
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null){
+            if(application instanceof HsFirebaseApplication)
+                ((HsFirebaseApplication) application).setFirebaseToken(token);
+            else if(application instanceof HsFirebaseMultiDexApplication)
+                ((HsFirebaseMultiDexApplication) application).setFirebaseToken(token);
+        }
 
         Intent intent = new Intent(HsFirebaseIntent.ACTION_TOKEN_REFRESH);
         intent.putExtra(HsFirebaseIntent.EXTRA_TOKEN, token);
