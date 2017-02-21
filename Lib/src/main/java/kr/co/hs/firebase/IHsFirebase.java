@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -60,6 +61,8 @@ public interface IHsFirebase extends IHs {
     boolean sendFirebaseAnalyticsLogEvent(String name, Bundle data);
     boolean setFirebaseAnalyticsUserId(String id);
     boolean setFirebaseAnalyticsCurrentScreen(Activity activity, String screenName, String screenClassOverride);
+    FirebaseAnalytics getFirebaseAnalytics();
+    boolean setFirebaseAnalyticsUserProperty(String key, String value);
 
     //인증 관련
     HsFirebaseAuth getFirebaseAuth();

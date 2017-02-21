@@ -33,7 +33,6 @@ import kr.co.hs.net.HsRestClient;
  */
 
 public class HsFirebaseApplication extends HsApplication implements IHsFirebaseApplication {
-
     private String mFirebaseToken = null;
     private FirebaseAnalytics mFirebaseAnalytics = null;
     private HsFirebaseAuth mFirebaseAuth = null;
@@ -76,6 +75,20 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
     public boolean setFirebaseAnalyticsCurrentScreen(Activity activity, String screenName, String screenClassOverride) {
         if(this.mFirebaseAnalytics != null){
             this.mFirebaseAnalytics.setCurrentScreen(activity, screenClassOverride, screenClassOverride);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public FirebaseAnalytics getFirebaseAnalytics() {
+        return mFirebaseAnalytics;
+    }
+
+    @Override
+    public boolean setFirebaseAnalyticsUserProperty(String key, String value) {
+        if(this.mFirebaseAnalytics != null){
+            this.mFirebaseAnalytics.setUserProperty(key, value);
             return true;
         }
         return false;
@@ -230,30 +243,117 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
         this.mFirebaseToken = token;
     }
     private void setFirebaseAnalyticsUserProperty(){
-        if(mFirebaseAnalytics != null){
-            mFirebaseAnalytics.setUserProperty(VERSION_BASEOS, Build.VERSION.BASE_OS);
-            mFirebaseAnalytics.setUserProperty(VERSION_CODENAME, Build.VERSION.CODENAME);
-            mFirebaseAnalytics.setUserProperty(VERSION_INCREMENTAL, Build.VERSION.INCREMENTAL);
-            mFirebaseAnalytics.setUserProperty(VERSION_RELEASE, Build.VERSION.RELEASE);
-            mFirebaseAnalytics.setUserProperty(VERSION_SDK_INT, ""+Build.VERSION.SDK_INT);
-            mFirebaseAnalytics.setUserProperty(BOARD, Build.BOARD);
-            mFirebaseAnalytics.setUserProperty(BOOTLOADER, Build.BOOTLOADER);
-            mFirebaseAnalytics.setUserProperty(BRAND, Build.BRAND);
-            mFirebaseAnalytics.setUserProperty(DEVICE, Build.DEVICE);
-            mFirebaseAnalytics.setUserProperty(DISPLAY, Build.DISPLAY);
-            mFirebaseAnalytics.setUserProperty(FINGERPRINT, Build.FINGERPRINT);
-            mFirebaseAnalytics.setUserProperty(HARDWARE, Build.HARDWARE);
-            mFirebaseAnalytics.setUserProperty(HOST, Build.HOST);
-            mFirebaseAnalytics.setUserProperty(ID, Build.ID);
-            mFirebaseAnalytics.setUserProperty(MANUFACTURER, Build.MANUFACTURER);
-            mFirebaseAnalytics.setUserProperty(MODEL, Build.MODEL);
-            mFirebaseAnalytics.setUserProperty(PRODUCT, Build.PRODUCT);
-            mFirebaseAnalytics.setUserProperty(SERIAL, Build.SERIAL);
-            mFirebaseAnalytics.setUserProperty(TAGS, Build.TAGS);
-            mFirebaseAnalytics.setUserProperty(TYPE, Build.TYPE);
-            mFirebaseAnalytics.setUserProperty(USER, Build.USER);
+        try{
+            setFirebaseAnalyticsUserProperty(VERSION_BASEOS, Build.VERSION.BASE_OS);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(VERSION_CODENAME, Build.VERSION.CODENAME);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(VERSION_INCREMENTAL, Build.VERSION.INCREMENTAL);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(VERSION_RELEASE, Build.VERSION.RELEASE);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(VERSION_SDK_INT, ""+Build.VERSION.SDK_INT);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(BOARD, Build.BOARD);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(BOOTLOADER, Build.BOOTLOADER);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(BRAND, Build.BRAND);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        try{
+            setFirebaseAnalyticsUserProperty(DEVICE, Build.DEVICE);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(DISPLAY, Build.DISPLAY);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(FINGERPRINT, Build.FINGERPRINT);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(HARDWARE, Build.HARDWARE);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(HOST, Build.HOST);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(ID, Build.ID);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(MANUFACTURER, Build.MANUFACTURER);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(MODEL, Build.MODEL);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(PRODUCT, Build.PRODUCT);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(SERIAL, Build.SERIAL);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(TAGS, Build.TAGS);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(TYPE, Build.TYPE);
+        }catch (Exception e){
+
+        }
+        try{
+            setFirebaseAnalyticsUserProperty(USER, Build.USER);
+        }catch (Exception e){
+
+        }
+        try{
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            mFirebaseAnalytics.setUserProperty(TIME, sdf.format(Build.TIME));
+            setFirebaseAnalyticsUserProperty(TIME, sdf.format(Build.TIME));
+        }catch (Exception e){
+
         }
     }
 }

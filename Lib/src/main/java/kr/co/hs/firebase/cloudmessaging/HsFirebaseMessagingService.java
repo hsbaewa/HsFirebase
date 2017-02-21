@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -59,6 +60,22 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
         IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.setFirebaseAnalyticsCurrentScreen(activity, screenName, screenClassOverride);
+        return false;
+    }
+
+    @Override
+    public FirebaseAnalytics getFirebaseAnalytics() {
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getFirebaseAnalytics();
+        return null;
+    }
+
+    @Override
+    public boolean setFirebaseAnalyticsUserProperty(String key, String value) {
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.setFirebaseAnalyticsUserProperty(key, value);
         return false;
     }
 
