@@ -244,7 +244,7 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
     }
     private void setFirebaseAnalyticsUserProperty(){
         try{
-            setFirebaseAnalyticsUserProperty(VERSION_BASEOS, Build.VERSION.BASE_OS);
+//            setFirebaseAnalyticsUserProperty(VERSION_BASEOS, Build.VERSION.BASE_OS);
         }catch (Exception e){
             e.printStackTrace();
         }
