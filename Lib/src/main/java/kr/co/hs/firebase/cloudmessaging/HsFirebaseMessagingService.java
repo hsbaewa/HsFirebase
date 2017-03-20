@@ -2,6 +2,7 @@ package kr.co.hs.firebase.cloudmessaging;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.Task;
@@ -320,6 +321,24 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
         if(application != null)
             return application.isRunningService(aClass);
         return false;
+    }
+
+    @Override
+    public int getColorCompat(int i) {
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getColorCompat(i);
+        else
+            return 0;
+    }
+
+    @Override
+    public Drawable getDrawableCompat(int i) {
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getDrawableCompat(i);
+        else
+            return null;
     }
 
     @Override
