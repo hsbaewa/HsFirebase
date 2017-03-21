@@ -257,4 +257,14 @@ public abstract class HsFirebaseFragment extends HsFragment implements IHsFireba
         }
         return null;
     }
+
+    public HsFirebaseActivity getHsFirebaseActivity(){
+        try{
+            HsFirebaseActivity activity = (HsFirebaseActivity) getActivity();
+            return activity;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
