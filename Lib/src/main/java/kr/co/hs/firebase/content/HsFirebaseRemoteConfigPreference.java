@@ -1,5 +1,6 @@
 package kr.co.hs.firebase.content;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
@@ -11,19 +12,32 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import java.util.Iterator;
 import java.util.Map;
 
-import kr.co.hs.content.HsPreferences;
+import kr.co.hs.content.advancedpreference.AdvancedPreference;
 
 /**
  * Created by Bae on 2016-12-31.
  */
 
-public class HsFirebaseRemoteConfigPreference extends HsPreferences implements OnCompleteListener<Void> {
+public class HsFirebaseRemoteConfigPreference extends AdvancedPreference implements OnCompleteListener<Void> {
 
     private FirebaseRemoteConfig mFirebaseRemoteConfig;
 
     public HsFirebaseRemoteConfigPreference(SharedPreferences mSharedPreferences) {
         super(mSharedPreferences);
+        init();
+    }
 
+    public HsFirebaseRemoteConfigPreference(Context context) {
+        super(context);
+        init();
+    }
+
+    public HsFirebaseRemoteConfigPreference(Context context, String name, int mode) {
+        super(context, name, mode);
+        init();
+    }
+
+    private void init(){
         mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         FirebaseRemoteConfigSettings settings = new FirebaseRemoteConfigSettings.Builder()
                 .build();

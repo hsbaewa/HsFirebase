@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.co.hs.app.HsActivity;
-import kr.co.hs.content.HsPreferences;
+import kr.co.hs.content.advancedpreference.AdvancedPreference;
 import kr.co.hs.firebase.IHsFirebaseApplication;
 import kr.co.hs.firebase.IHsFirebaseService;
 import kr.co.hs.firebase.auth.HsFirebaseAuth;
@@ -172,7 +172,7 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
     }
 
     @Override
-    public HsPreferences getDefaultPreference() {
+    public AdvancedPreference getDefaultPreference() {
         IHsFirebaseApplication application = getHsFirebaseApplication();
         if(application != null)
             return application.getDefaultPreference();
