@@ -51,12 +51,12 @@ public class SampleActivity extends BaseActivity implements HsRecyclerView.OnIte
     public void onItemClick(HsRecyclerView hsRecyclerView, RecyclerView.ViewHolder viewHolder, View view, int i) {
         switch (i){
             case 0:{
-                Intent intent = new Intent(getContext(), RemoteConfigSampleActivity.class);
-                startActivity(intent);
-
-                Bundle param = new Bundle();
-                param.putString("name", "RemoteConfigSampleActivity");
-                sendFirebaseAnalyticsLogEvent("Activity", param);
+//                Intent intent = new Intent(getContext(), RemoteConfigSampleActivity.class);
+//                startActivity(intent);
+//
+//                Bundle param = new Bundle();
+//                param.putString("name", "RemoteConfigSampleActivity");
+//                sendFirebaseAnalyticsLogEvent("Activity", param);
                 break;
             }
             case 1:{
@@ -113,7 +113,7 @@ public class SampleActivity extends BaseActivity implements HsRecyclerView.OnIte
         public void onBindHsViewHolder(SampleViewHolder holder, int i, boolean b) {
             switch (i){
                 case 0:{
-                    holder.textView.setText("RemoteConfigSample");
+                    holder.textView.setText("RemoteConfigSample(Deprecated)");
                     break;
                 }
                 case 1:{

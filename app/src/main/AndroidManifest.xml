@@ -16,8 +16,6 @@
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-        <activity android:name=".RemoteConfigSampleActivity"
-            android:label="RemoteConfigSample"/>
         <activity android:name=".AnalyticsSampleActivity"
             android:label="AnalyticsSample"/>
         <activity android:name=".AuthSampleActivity"
