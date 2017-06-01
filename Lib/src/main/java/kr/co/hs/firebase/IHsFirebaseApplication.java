@@ -7,4 +7,5 @@ import kr.co.hs.app.IHsApplication;
  */
 
 public interface IHsFirebaseApplication extends IHsApplication, IHsFirebaseComponent {
+    void onFirebaseTokenRefresh(String token);
 }

@@ -238,9 +238,14 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
         return getFirebaseStorage().getReferenceFromUrl(url);
     }
 
+    @Override
+    public void onFirebaseTokenRefresh(String token) {
+
+    }
 
     void setFirebaseToken(String token){
         this.mFirebaseToken = token;
+        onFirebaseTokenRefresh(this.mFirebaseToken);
     }
     private void setFirebaseAnalyticsUserProperty(){
         try{
@@ -356,5 +361,7 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
 
         }
     }
+
+
 }
 
