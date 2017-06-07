@@ -349,4 +349,22 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
         }
         return null;
     }
+
+    @Override
+    public String getVersionName() {
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getVersionName();
+        else
+            return null;
+    }
+
+    @Override
+    public int getVersionCode() {
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getVersionCode();
+        else
+            return -1;
+    }
 }
