@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
@@ -15,11 +14,9 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import kr.co.hs.app.HsActivity;
 import kr.co.hs.firebase.IHsFirebaseApplication;
 import kr.co.hs.firebase.IHsFirebaseService;
@@ -366,5 +363,14 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
             return application.getVersionCode();
         else
             return -1;
+    }
+
+    @Override
+    public boolean isForeground() {
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.isForeground();
+        else
+            return false;
     }
 }
