@@ -3,7 +3,6 @@ package kr.co.hs.firebase.app;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
-
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
@@ -14,13 +13,10 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import org.json.simple.parser.ParseException;
-
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
-
 import kr.co.hs.app.HsApplication;
 import kr.co.hs.firebase.IHsFirebaseApplication;
 import kr.co.hs.firebase.auth.HsFirebaseAuth;
@@ -43,7 +39,7 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
         super.onCreate();
         mFirebaseToken = FirebaseInstanceId.getInstance().getToken();
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getApplicationContext());
-        setFirebaseAnalyticsUserProperty();
+//        setFirebaseAnalyticsUserProperty();
         mFirebaseAuth = HsFirebaseAuth.getInstance();
         mFirebaseMessaging = HsFirebaseMessaging.getInstance();
     }
@@ -247,7 +243,7 @@ public class HsFirebaseApplication extends HsApplication implements IHsFirebaseA
         this.mFirebaseToken = token;
         onFirebaseTokenRefresh(this.mFirebaseToken);
     }
-    private void setFirebaseAnalyticsUserProperty(){
+    public void setFirebaseAnalyticsUserProperty(){
         try{
 //            setFirebaseAnalyticsUserProperty(VERSION_BASEOS, Build.VERSION.BASE_OS);
         }catch (Exception e){
