@@ -3,6 +3,7 @@ package kr.co.hs.firebase.cloudmessaging;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -372,5 +373,41 @@ public class HsFirebaseMessagingService extends FirebaseMessagingService impleme
             return application.isForeground();
         else
             return false;
+    }
+
+    @Override
+    public Uri getPlayStoreUri() {
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getPlayStoreUri();
+        else
+            return null;
+    }
+
+    @Override
+    public Uri getPlayStoreUri(String s) {
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getPlayStoreUri(s);
+        else
+            return null;
+    }
+
+    @Override
+    public String getPlayStoreUrl() {
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getPlayStoreUrl();
+        else
+            return null;
+    }
+
+    @Override
+    public String getPlayStoreUrl(String s) {
+        IHsFirebaseApplication application = getHsFirebaseApplication();
+        if(application != null)
+            return application.getPlayStoreUrl(s);
+        else
+            return null;
     }
 }
